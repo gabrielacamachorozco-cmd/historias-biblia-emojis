@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>📖 Historias de la Biblia con Emojis</title>
+  <style>
+    body {
+      font-family: "Comic Sans MS", "Segoe UI Emoji", sans-serif;
+      background: #fdf6ec;
+      color: #333;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #4a2c2a;
+      margin-bottom: 25px;
+    }
+    .historia {
+      background: #fff9f2;
+      border: 2px solid #e0c9a6;
+      border-radius: 10px;
+      padding: 15px;
+      margin: 10px 0;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    }
+    .titulo {
+      font-size: 1.2em;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #86592d;
+      display: none; /* ocultar al inicio */
+    }
+    .emojis {
+      font-size: 1.8em;
+      margin-bottom: 10px;
+      text-align: center;
+    }
+    .texto {
+      display: none;
+      font-size: 1em;
+      margin-top: 5px;
+      color: #444;
+    }
+    button {
+      background-color: #f7d9a8;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-right: 5px;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #f0c37e;
+    }
+    .botones {
+      text-align: center;
+      margin-top: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>📖 Historias de la Biblia con Emojis</h1>
+
+  <div id="contenedor-historias"></div>
+
+  <script>
+    const historias = [
+      { titulo: "🌍 La Creación", emojis: "🌅🌙⭐️🌊🌴🐘🦁👨👩", texto: "Dios hizo todo: el mundo, los animales y las personas." },
+      { titulo: "🍎 Adán y Eva", emojis: "🌳🍎🐍😈😢🚪", texto: "Comieron del fruto prohibido y salieron del Edén." },
+      { titulo: "🌊🐘 El Arca de Noé", emojis: "🌧️🛶🐘🦒🌈", texto: "Llovió mucho, pero Dios salvó a Noé y puso el arco iris." },
+      { titulo: "🔥 Moisés y la Zarza", emojis: "🌿🔥👀🗣️", texto: "Dios habló con Moisés desde una zarza que ardía." },
+      { titulo: "🌊 Moisés abre el Mar", emojis: "✋🌊🚶‍♂️🚶‍♀️🌊💥", texto: "Dios abrió el mar para que su pueblo cruzara." },
+      { titulo: "🦁 Daniel en el Foso", emojis: "🙏🦁😴😇", texto: "Daniel oró, lo echaron con leones, pero Dios lo cuidó." },
+      { titulo: "🍼⭐️ Jesús Nace", emojis: "👩🤰🐴🍼⭐️👑🎁", texto: "Jesús nació en Belén y fue adorado por reyes." },
+      { titulo: "🍞🐟 Jesús Alimenta a Muchos", emojis: "🍞🍞🐟🐟🙏😋", texto: "Jesús multiplicó la comida y todos comieron." },
+      { titulo: "✝️🌅 Jesús Resucita", emojis: "😢✝️⚰️🌅😇❤️", texto: "Jesús murió, pero resucitó y vive para siempre." },
+      { titulo: "🪨🪓 David y Goliat", emojis: "👦🪨💪😱🤕👑", texto: "David venció al gigante Goliat con una piedra y confió en Dios." },
+      { titulo: "🐳 Jonás y el Gran Pez", emojis: "🚢🌊😨🐳😴😮🗣️", texto: "Jonás desobedeció, lo tragó un pez, oró y Dios lo salvó." }
+    ];
+
+    const contenedor = document.getElementById("contenedor-historias");
+
+    historias.forEach((h, i) => {
+      const div = document.createElement("div");
+      div.className = "historia";
+      div.innerHTML = `
+        <div class="titulo" id="titulo-${i}">${h.titulo}</div>
+        <div class="emojis">${h.emojis}</div>
+        <div class="botones">
+          <button onclick="mostrarTexto(${i})">👀 Mostrar/Ocultar</button>
+          <button onclick="leerTexto(${i})">🔊 Escuchar</button>
+        </div>
+        <div class="texto" id="texto-${i}">${h.texto}</div>
+      `;
+      contenedor.appendChild(div);
+    });
+
+    function mostrarTexto(id) {
+      const texto = document.getElementById(`texto-${id}`);
+      const titulo = document.getElementById(`titulo-${id}`);
+      
+      // alternar visualización
+      texto.style.display = (texto.style.display === "none" || texto.style.display === "") ? "block" : "none";
+      titulo.style.display = (titulo.style.display === "none" || titulo.style.display === "") ? "block" : "none";
+    }
+
+    function leerTexto(id) {
+      const texto = document.getElementById(`texto-${id}`).textContent;
+      const narrador = new SpeechSynthesisUtterance(texto);
+      narrador.lang = "es-ES";
+      window.speechSynthesis.speak(narrador);
+    }
+  </script>
+</body>
+</html>
